@@ -1,3 +1,4 @@
+```yaml id="3e6k1i"
 name: Windows Runner Test
 
 on:
@@ -48,21 +49,16 @@ jobs:
             -Destination "\\172.31.17.82\D$\deployments\app.zip" `
             -Force
 
-      - name: Extract ZIP On Target Server
+      - name: Extract ZIP
         shell: powershell
         run: |
 
-          Invoke-Command `
-            -ComputerName 172.31.17.82 `
-            -ScriptBlock {
+          Expand-Archive `
+            -Path "\\172.31.17.82\D$\deployments\app.zip" `
+            -DestinationPath "\\172.31.17.82\D$\deployments" `
+            -Force
 
-              Expand-Archive `
-                -Path "D:\deployments\app.zip" `
-                -DestinationPath "D:\deployments\current" `
-                -Force
+          Write-Host "Deployment Successful"
 
-              Write-Host "Deployment Successful"
-
-              Get-ChildItem "D:\deployments\current"
-
-          }
+          Get-ChildItem "\\172.31.17.82\D$\deployments"
+```
