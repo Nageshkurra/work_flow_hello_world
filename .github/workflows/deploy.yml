@@ -16,16 +16,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Verify Runner
-        shell: powershell
-        run: |
-
-          Write-Host "GitHub Runner Working Successfully"
-
-          hostname
-          whoami
-          Get-Location
-
       - name: Create ZIP
         shell: powershell
         run: |
@@ -47,7 +37,7 @@ jobs:
 
           Copy-Item `
             "app.zip" `
-            "\\172.31.29.167\C$\Windows\System32\services\app.zip" `
+            "\\172.31.29.167\C$\services\app.zip" `
             -Force
 
       - name: Extract ZIP On Target Server
@@ -59,8 +49,8 @@ jobs:
             -ScriptBlock {
 
               Expand-Archive `
-                -Path "C:\Windows\System32\services\app.zip" `
-                -DestinationPath "C:\Windows\System32\services\current" `
+                -Path "C:\services\app.zip" `
+                -DestinationPath "C:\services\current" `
                 -Force
 
               Write-Host "Deployment Successful"
