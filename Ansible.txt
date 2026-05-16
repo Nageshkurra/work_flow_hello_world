@@ -1,0 +1,6 @@
+useradd nagesh 
+echo Omsai@123 | passwd --stdin nagesh
+echo "nagesh ALL=(ALL) NOPASSWD ALL" > /etc/sudoers.d/nagesh
+chmod 440 /etc/sudoers.d/nagesh 
+
+for i in servera serverb serverc serverd; do ssh nagesh7pm@$i uptime; done 

@@ -1,0 +1,9 @@
+<html>
+<head>
+    <title>Github CD Test</title>
+</head>
+<body>
+    <h1>Deployment Successful</h1>
+    <h2>Version 1</h2>
+</body>
+</html>
