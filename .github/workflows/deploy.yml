@@ -1,0 +1,44 @@
+name: Windows Runner Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  test:
+
+    runs-on: self-hosted
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify Runner
+        shell: powershell
+        run: |
+
+          Write-Host "GitHub Runner Working Successfully"
+
+          hostname
+
+          whoami
+
+          Get-Location
+
+      - name: Create ZIP
+        shell: powershell
+        run: |
+
+          Compress-Archive `
+            -Path .\* `
+            -DestinationPath app.zip `
+            -Force
+
+      - name: Verify ZIP
+        shell: powershell
+        run: |
+
+          Get-ChildItem
