@@ -1,4 +1,3 @@
-```yaml id="3e6k1i"
 name: Windows Runner Test
 
 on:
@@ -61,4 +60,3 @@ jobs:
           Write-Host "Deployment Successful"
 
           Get-ChildItem "\\172.31.17.82\D$\deployments"
-```
