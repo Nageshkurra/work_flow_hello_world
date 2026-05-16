@@ -1,4 +1,3 @@
-```yaml
 name: Windows Runner Test
 
 on:
@@ -67,4 +66,3 @@ jobs:
               Get-ChildItem "D:\deployments\current"
 
           }
-```
