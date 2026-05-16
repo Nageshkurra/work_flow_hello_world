@@ -1,3 +1,4 @@
+```yaml
 name: Windows Runner Test
 
 on:
@@ -43,10 +44,10 @@ jobs:
         shell: powershell
         run: |
 
-          robocopy `
-            "." `
-            "\\172.31.17.82\D$\deployments" `
-            app.zip
+          Copy-Item `
+            -Path ".\app.zip" `
+            -Destination "\\172.31.17.82\D$\deployments\app.zip" `
+            -Force
 
       - name: Extract ZIP On Target Server
         shell: powershell
@@ -66,3 +67,4 @@ jobs:
               Get-ChildItem "D:\deployments\current"
 
           }
+```
