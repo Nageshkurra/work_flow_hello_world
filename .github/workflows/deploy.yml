@@ -29,30 +29,40 @@ jobs:
         shell: powershell
         run: |
 
-          Get-ChildItem
+          Get-ChildItem app.zip
+
+      - name: Authenticate SMB Share
+        shell: powershell
+        run: |
+
+          net use \\172.31.17.82\D$ `
+            /user:${{ secrets.WINDOWS_USERNAME }} `
+            "${{ secrets.WINDOWS_PASSWORD }}"
 
       - name: Copy ZIP To Target Server
         shell: powershell
         run: |
 
-          Copy-Item `
-            "app.zip" `
-            "\\172.31.29.167\C$\services\app.zip" `
-            -Force
+          robocopy `
+            "." `
+            "\\172.31.17.82\D$\deployments" `
+            app.zip
 
       - name: Extract ZIP On Target Server
         shell: powershell
         run: |
 
           Invoke-Command `
-            -ComputerName 172.31.29.167 `
+            -ComputerName 172.31.17.82 `
             -ScriptBlock {
 
               Expand-Archive `
-                -Path "C:\services\app.zip" `
-                -DestinationPath "C:\services\current" `
+                -Path "D:\deployments\app.zip" `
+                -DestinationPath "D:\deployments\current" `
                 -Force
 
               Write-Host "Deployment Successful"
+
+              Get-ChildItem "D:\deployments\current"
 
           }
