@@ -7,7 +7,7 @@ on:
 
 jobs:
 
-  test:
+  deploy:
 
     runs-on: self-hosted
 
@@ -23,9 +23,7 @@ jobs:
           Write-Host "GitHub Runner Working Successfully"
 
           hostname
-
           whoami
-
           Get-Location
 
       - name: Create ZIP
@@ -42,3 +40,29 @@ jobs:
         run: |
 
           Get-ChildItem
+
+      - name: Copy ZIP To Target Server
+        shell: powershell
+        run: |
+
+          Copy-Item `
+            "app.zip" `
+            "\\172.31.29.167\C$\Windows\System32\services\app.zip" `
+            -Force
+
+      - name: Extract ZIP On Target Server
+        shell: powershell
+        run: |
+
+          Invoke-Command `
+            -ComputerName 172.31.29.167 `
+            -ScriptBlock {
+
+              Expand-Archive `
+                -Path "C:\Windows\System32\services\app.zip" `
+                -DestinationPath "C:\Windows\System32\services\current" `
+                -Force
+
+              Write-Host "Deployment Successful"
+
+          }
