@@ -54,7 +54,7 @@ jobs:
 
           Expand-Archive `
             -Path "\\172.31.15.241\D$\deployments\app.zip" `
-            -DestinationPath "\\172.31.15.241\D$\deployments" `
+            -DestinationPath "\\172.31.15.241\D$\services" `
             -Force
 
           Write-Host "Deployment Successful"
