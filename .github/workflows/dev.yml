@@ -1,1 +1,9 @@
+environment: dev
 
+servers:
+  webserver1: 172.31.15.241
+ 
+paths:
+  deployment_path: 'D:\deployments'
+  services_path: 'D:\services'
+  backup_path: 'D:\services_backup'
