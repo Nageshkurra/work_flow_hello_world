@@ -9,7 +9,7 @@ jobs:
 
   deploy:
 
-    runs-on: Windows-CD
+    runs-on: non-prod
 
     steps:
 
