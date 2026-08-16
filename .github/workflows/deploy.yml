@@ -9,7 +9,7 @@ jobs:
 
   deploy:
 
-    runs-on: self-hosted
+    runs-on: Windows-CD
 
     steps:
 
@@ -35,7 +35,7 @@ jobs:
         shell: powershell
         run: |
 
-          net use \\172.31.17.82\D$ `
+          net use \\172.31.15.241\D$ `
             /user:${{ secrets.WINDOWS_USERNAME }} `
             "${{ secrets.WINDOWS_PASSWORD }}"
 
@@ -45,7 +45,7 @@ jobs:
 
           Copy-Item `
             -Path ".\app.zip" `
-            -Destination "\\172.31.17.82\D$\deployments\app.zip" `
+            -Destination "\\172.31.15.241\D$\deployments\app.zip" `
             -Force
 
       - name: Extract ZIP
@@ -53,10 +53,10 @@ jobs:
         run: |
 
           Expand-Archive `
-            -Path "\\172.31.17.82\D$\deployments\app.zip" `
-            -DestinationPath "\\172.31.17.82\D$\deployments" `
+            -Path "\\172.31.15.241\D$\deployments\app.zip" `
+            -DestinationPath "\\172.31.15.241\D$\deployments" `
             -Force
 
           Write-Host "Deployment Successful"
 
-          Get-ChildItem "\\172.31.17.82\D$\deployments"
+          Get-ChildItem "\\172.31.15.241\D$\deployments"
